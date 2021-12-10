@@ -25,6 +25,7 @@ Followed a tutorial a long time ago to build a forum from scratch. I added some 
 - Bootstrap
 - JavaScript
 - Git
+- MySQL
 
 
 <!-- ## Current Features

@@ -1,6 +1,6 @@
 # Forum Tutorial Project
 A PHP, MySQL and Bootstrap forum adaptation from a tutorial.
-- Live Github Pages demo [_here_](https://mch123.x10host.com).
+- Live demo [_here_](https://mch123.x10host.com).
 
 ## Table of Contents
 * [General Info](#general-information)

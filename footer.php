@@ -2,7 +2,7 @@
             <!-- GitHub repository link -->
             <a href="https://github.com/MartynHorslen/forum" target="_blank"> 
                 <!-- GitHub Icon -->
-                <img src="https://pngimg.com/uploads/github/github_PNG83.png" />
+                <img src="https://pngimg.com/uploads/github/github_PNG83.png" width="25px" height="25px"/>
                 Forum GitHub Repository
             </a>
         </footer>

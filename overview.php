@@ -13,7 +13,7 @@
     }
     else
     {
-        if($categories->rowCount === 0)
+        if(count($categories) === 0)
         {
             echo 'No categories defined yet.';
         }
@@ -53,7 +53,7 @@
                     <div class="row">
                         <div class="col-9 col-sm-8">
                             <div class="card-body py-0 px-2">
-                                ' . $lastTopic['cat_description'] . '
+                                ' . $catRow['cat_description'] . '
                             </div>
                             <div class="card-body py-0 px-2">
                                 Latest Topic: <a href="index.php?view=topic&topic=' . $topic_id . '">' . $lastTopic['topic_subject'] . '</a> posted by <a href="#">' . $lastTopic['user_name'] . '</a> 

@@ -20,8 +20,8 @@
         include 'topic.php';
         //echo 'Forum Topic view';
     } else if ($_GET['view'] == "new"){
-        //include 'new.php';
-        echo 'Forum New Posts view';
+        include 'newposts.php';
+        //echo 'Forum New Posts view';
     }  else if ($_GET['view'] == "create"){
         //include 'create.php';
         echo 'Create a new topic.';

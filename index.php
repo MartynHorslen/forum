@@ -14,8 +14,8 @@
         include 'overview.php';
         //echo 'Forum Overview';
     } else if ($_GET['view'] == "cat") {
-        //include 'category.php';
-        echo 'Forum Category view';
+        include 'category.php';
+        //echo 'Forum Category view';
     } else if ($_GET['view'] == "topic"){
         //include 'topic.php';
         echo 'Forum Topic view';

@@ -1,4 +1,4 @@
-<header class="sticky-top">
+<header> <!-- class="sticky-top" -->
     <nav class="navbar navbar-light navbar-expand">
         <!-- Think this is for responsive navbars but can't remember.
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

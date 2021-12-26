@@ -7,28 +7,26 @@
     $result = $sql->fetchAll(PDO::FETCH_ASSOC);
     foreach($result as $post) {
         echo '<div class="card my-1">
+               <div class="card-header px-3">  
+                    Topic: <a href="index.php?view=topic&topic=' . $post['topic_id'] . '">' . $post['topic_subject'] . '</a>
+               </div>
                 <div class="row no-gutters">
-                    <div class="col-3 px-0">
-                        <div class="row">
-                            <div class="col py-1 px-4">
-                                Topic: <a href="index.php?view=topic&topic=' . $post['topic_id'] . '">' . $post['topic_subject'] . '</a>
-                            </div>
-                        </div>
+                    <div class="col-5 px-0">
                         <div class="row">
                             <div class="col py-1 px-4">
                                 ' . $post['post_date'] . '
                             </div>
                         </div>
                     </div>
-                    <div class="col-9 py-1 ">
+                    <div class="col-7 py-1 ">
                         ' . $post['post_content'] . '
                     </div>
                 </div>
                 <div class="row no-gutters">
-                    <div class="col py-1 px-2">
+                    <div class="col-5 py-1 px-2">
                         By: <a href="#">' . $post['user_name'] . '</a>
                     </div>
-                    <div class="col-9 py-1">
+                    <div class="col-7 py-1">
                         <a href="index.php?view=topic&topic=' . $post['topic_id'] . '#post-' . $post['post_id'] . '">View post</a>
                     </div>
                 </div>

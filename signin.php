@@ -58,7 +58,7 @@
                     }
                 } else {
                     //Return to forum overview because no view is set
-                    echo '<div class="card-footer text-center"><a href="register.php">Click here to create an account.</a></div>';
+                    echo '<div class="card-footer text-center"><a href="index.php?view=register">Click here to create an account.</a></div>';
                     echo '<div class="card-footer text-center"><a href="index.php">Click here to return to previous page.</a></div>';
                 }
             echo '</div>';

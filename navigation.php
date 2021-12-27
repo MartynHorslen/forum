@@ -21,7 +21,7 @@
             }
             else
             {
-                if ($_GET['view'] === 'signin' || !$_GET['view']){
+                if (!isset($_GET['view']) || $_GET['view'] === 'signin'){
                     //don't set 'previous'
                     echo '<a href="index.php?view=signin">Sign in</a> or <a href="#">create an account</a>.';
                 } else if ($_GET['view'] === 'topic'){

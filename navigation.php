@@ -21,7 +21,7 @@
             }
             else
             {
-                echo '<a href="#">Sign in</a> or <a href="#">create an account</a>.';
+                echo '<a href="signin.php?view=' . $_GET['view'] . '">Sign in</a> or <a href="#">create an account</a>.';
             }
             ?>
         </div>

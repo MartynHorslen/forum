@@ -43,6 +43,7 @@
                         <div class="form-group"><button type="submit" class="btn btn-secondary btn-md w-100" name="sign-in-button">Sign In</button></div>
                     </form>
                 </div>
+                <div class="card-footer text-center"><a href="#">Click here to create an account.</a></div>
             </div>';
         } 
     }

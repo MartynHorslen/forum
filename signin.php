@@ -2,14 +2,14 @@
     //Check whether user is already signed in
     if ($_SESSION['signed_in']) {
         //If signed in, return to previous page or forum overview
-        if ($_GET['view']){
+        if ($_GET['previous']){
             //If topic is set, get topic to return to.
             if ($_GET['topic']) {
                 //return to specific topic
-                header('Location:index.php?view=' . $_GET['view'] . '&topic=' . $_GET['topic']);
+                header('Location:index.php?view=' . $_GET['previous'] . '&topic=' . $_GET['topic']);
             } else {
                 //return to the set view
-                header('Location:index.php?view=' . $_GET['view']);
+                header('Location:index.php?view=' . $_GET['previous']);
             }
         } else {
             //Return to forum overview because no view is set
@@ -42,9 +42,26 @@
                         </div>
                         <div class="form-group"><button type="submit" class="btn btn-secondary btn-md w-100" name="sign-in-button">Sign In</button></div>
                     </form>
-                </div>
-                <div class="card-footer text-center"><a href="#">Click here to create an account.</a></div>
-            </div>';
+                </div>';
+
+                // if/else logic to handle different links depending on what page to return to or to carry on to the registration page.
+                if ($_GET['previous']){
+                    //If topic is set, get topic to return to.
+                    if ($_GET['topic']) {
+                        //Carry specific topic to the register view and create return link to topic
+                        echo '<div class="card-footer text-center"><a href="index.php?view=register&previous=' . $_GET['previous'] . '&topic=' . $_GET['topic'] . '">Click here to create an account.</a></div>';
+                        echo '<div class="card-footer text-center"><a href="index.php?view=' . $_GET['previous'] . '&topic=' . $_GET['topic'] . '">Click here to return to previous page.</a></div>';
+                    } else {
+                        //carry non-topic view to register page or return to view
+                        echo '<div class="card-footer text-center"><a href="index.php?view=register&previous=' . $_GET['previous'] . '">Click here to create an account.</a></div>';
+                        echo '<div class="card-footer text-center"><a href="index.php?view=' . $_GET['previous'] . '">Click here to return to previous page.</a></div>';
+                    }
+                } else {
+                    //Return to forum overview because no view is set
+                    echo '<div class="card-footer text-center"><a href="register.php">Click here to create an account.</a></div>';
+                    echo '<div class="card-footer text-center"><a href="index.php">Click here to return to previous page.</a></div>';
+                }
+            echo '</div>';
         } 
     }
 ?>

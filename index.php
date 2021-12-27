@@ -25,7 +25,10 @@
     }  else if ($_GET['view'] == "create"){
         //include 'create.php';
         echo 'Create a new topic.';
-    } else {
+    }  else if ($_GET['view'] == "signin"){
+        include 'signin.php';
+        //echo 'Sign in page';
+    }  else {
         echo "Error";
     }
 

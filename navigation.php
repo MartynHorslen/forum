@@ -21,9 +21,16 @@
             }
             else
             {
-                // ******* This needs updating with if/else scenarios for various pages. *********
-                // Don't want a previous page for signin page. Want a topic number for topic pages. Also no need to set 'previous' if coming from overview page.
-                echo '<a href="index.php?view=signin&previous=' . $_GET['view'] . '">Sign in</a> or <a href="#">create an account</a>.';
+                if ($_GET['view'] === 'signin' || !$_GET['view']){
+                    //don't set 'previous'
+                    echo '<a href="index.php?view=signin">Sign in</a> or <a href="#">create an account</a>.';
+                } else if ($_GET['view'] === 'topic'){
+                    //set 'previous' to topic view and topic number
+                    echo '<a href="index.php?view=signin&previous=topic&topic=' . $_GET['topic'] . '">Sign in</a> or <a href="#">create an account</a>.';
+                } else {
+                    //set 'previous' to current view
+                    echo '<a href="index.php?view=signin&previous=' . $_GET['view'] . '">Sign in</a> or <a href="#">create an account</a>.';
+                }
             }
             ?>
         </div>

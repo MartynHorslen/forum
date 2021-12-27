@@ -7,7 +7,9 @@
     <div class="col-sm-10 col-md-8 offset-sm-1 offset-md-2"> ';
 
     //Forum Navigation
-    include 'navigation.php';
+    if ($_GET['view'] != 'signin'){
+        include 'navigation.php';
+    }
 
     //Forum page set by url view.
     if (!isset($_GET['view'])) {

@@ -30,7 +30,7 @@
         } else {
             //Else display the form and registration link.
             echo '
-            <div class="card border-secondary mb-3 m-auto" style="max-width: 18rem;">
+            <div class="card border-secondary mb-3 m-auto" style="max-width: 28rem;">
                 <div class="card-header">Login:</div>
                 <div class="card-body text-secondary">
                     <form class="" method="post" action="">

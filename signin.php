@@ -1,10 +1,10 @@
 <?php
     //Check whether user is already signed in
-    if ($_SESSION['signed_in']) {
+    if (isset($_SESSION['signed_in'])) {
         //If signed in, return to previous page or forum overview
-        if ($_GET['previous']){
+        if (isset($_GET['previous'])){
             //If topic is set, get topic to return to.
-            if ($_GET['topic']) {
+            if (isset($_GET['topic'])) {
                 //return to specific topic
                 header('Location:index.php?view=' . $_GET['previous'] . '&topic=' . $_GET['topic']);
             } else {
@@ -45,9 +45,9 @@
                 </div>';
 
                 // if/else logic to handle different links depending on what page to return to or to carry on to the registration page.
-                if ($_GET['previous']){
+                if (isset($_GET['previous'])){
                     //If topic is set, get topic to return to.
-                    if ($_GET['topic']) {
+                    if (isset($_GET['topic'])) {
                         //Carry specific topic to the register view and create return link to topic
                         echo '<div class="card-footer text-center"><a href="index.php?view=register&previous=' . $_GET['previous'] . '&topic=' . $_GET['topic'] . '">Click here to create an account.</a></div>';
                         echo '<div class="card-footer text-center"><a href="index.php?view=' . $_GET['previous'] . '&topic=' . $_GET['topic'] . '">Click here to return to previous page.</a></div>';

@@ -98,10 +98,28 @@
                     $sql->bindParam(':user_name', $_POST['user_name'], PDO::PARAM_STR);
                     $sql->bindParam(':user_pass', $user_pass, PDO::PARAM_STR);
                     $sql->execute();
-                    $validated = count($sql->fetchAll());
+                    $result = $sql->fetch(PDO::FETCH_ASSOC);
+                    $validated = count($result);
                     if ($validated) {
                         //If correct, set session information and return user to previous page with login notification.
-                        echo 'Logged in!';
+                        $_SESSION['signed_in'] = true;
+                        $_SESSION['user_id'] = $result['user_id'];
+                        $_SESSION['user_name'] = $result['user_name'];
+                        $_SESSION['user_level'] = $result['user_level'];
+                        //Reload page and direct to previous page before sign in.
+                        if (isset($_GET['previous'])){
+                            //If topic is set, get topic to return to.
+                            if (isset($_GET['topic'])) {
+                                //return to topic
+                                header('Location:index.php?view=' . $_GET['previous'] . '&topic=' . $_GET['topic']);
+                            } else {
+                                //return to view
+                                header('Location:index.php?view=' . $_GET['previous']);
+                            }
+                        } else {
+                            //Return to forum overview because no view is set
+                            header('Location:index.php');
+                        }
                     } else {
                         //Else display errors and increment a login counter (Basic $session counter or advanced IP, Username, datetime tracked in DB).
                         echo 'Wrong username or password.';

@@ -19,13 +19,6 @@
         //Check whether the login form has been submitted
         if($_SERVER['REQUEST_METHOD'] == 'POST')
         {
-            /********************************* */
-            //Create a login attempt counter.
-            /******************************** */
-
-
-            /*********************************** */
-
             //Prepare array to collect errors. This will be more useful for registration but still worth doing here.
             $errors = array();
 
@@ -47,31 +40,119 @@
 
                 //If errors, display them and redisplay form with red error border.
                 if(!empty($errors)){
-                echo '<div class="card border-danger mb-3 m-auto" style="max-width: 28rem;">
-                    <div class="card-header">Login:</div>';
+                    /********************************* */
+                    //Create a login attempt counter stored in DB.
+                    /******************************** */
+                    $login_counter = 5;
 
-                    echo '<div class="alert alert-danger" role="alert">';
-                    echo 'Uh-oh.. a couple of fields are not filled in correctly..';
-                    echo '<ul>';
-                    foreach($errors as $key => $value) /* walk through the array so all the errors get displayed */
-                    {
-                        echo '<li>' . $value . '</li>'; /* this generates a nice error list */
-                    }
+                    /*********************************** */
+
+                    echo '<div class="card border-danger mb-3 m-auto" style="max-width: 28rem;">
+                        <div class="card-header">Login:</div>';
+
+                        echo '<div class="alert alert-danger" role="alert">';
+                        echo 'Uh-oh.. a couple of fields are not filled in correctly..';
+                        echo '<ul>';
+                        foreach($errors as $key => $value) /* walk through the array so all the errors get displayed */
+                        {
+                            echo '<li>' . $value . '</li>'; /* this generates a nice error list */
+                        }
+                        echo '</ul>';
+                        echo '</div>';
+
+                        echo '<div class="card-body text-secondary">
+                            <form class="" method="post" action="">
+                                <div class="form-group">
+                                    <input type="username" class="form-control text-center" id="user_name" name="user_name" placeholder="Username">
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" class="form-control text-center" id="user_pass" name="user_pass" placeholder="Password">
+                                </div>
+                                <div class="form-group"><button type="submit" class="btn btn-secondary btn-md w-100" name="sign-in-button">Sign In</button></div>
+                            </form>
+                        </div>';
+
+                        // if/else logic to handle different links depending on what page to return to or to carry on to the registration page.
+                        if (isset($_GET['previous'])){
+                            //If topic is set, get topic to return to.
+                            if (isset($_GET['topic'])) {
+                                //Carry specific topic to the register view and create return link to topic
+                                echo '<div class="card-footer text-center"><a href="index.php?view=register&previous=' . $_GET['previous'] . '&topic=' . $_GET['topic'] . '">Click here to create an account.</a></div>';
+                                echo '<div class="card-footer text-center"><a href="index.php?view=' . $_GET['previous'] . '&topic=' . $_GET['topic'] . '">Click here to return to previous page.</a></div>';
+                            } else {
+                                //carry non-topic view to register page or return to view
+                                echo '<div class="card-footer text-center"><a href="index.php?view=register&previous=' . $_GET['previous'] . '">Click here to create an account.</a></div>';
+                                echo '<div class="card-footer text-center"><a href="index.php?view=' . $_GET['previous'] . '">Click here to return to previous page.</a></div>';
+                            }
+                        } else {
+                            //Return to forum overview because no view is set
+                            echo '<div class="card-footer text-center"><a href="index.php?view=register">Click here to create an account.</a></div>';
+                            echo '<div class="card-footer text-center"><a href="index.php">Click here to return to previous page.</a></div>';
+                        }
+                    echo '</div>';
+                } else {
+                    //No errors, check username and password combination against database. Also hash and salt password for security.
+                    //May need to sanitise and potentially filter for pattern/type at some point.
+                    $user_pass = md5($_POST['user_pass']);
+                    $sql = $dbh->prepare("SELECT user_id, user_name, user_level FROM users WHERE user_name = :user_name AND user_pass = :user_pass");
+                    $sql->bindParam(':user_name', $_POST['user_name'], PDO::PARAM_STR);
+                    $sql->bindParam(':user_pass', $user_pass, PDO::PARAM_STR);
+                    $sql->execute();
+                    $result = $sql->fetchAll(PDO::FETCH_ASSOC);
+                    $validated = count($result);
+
+                    if ($validated === 1) {
+                        //If correct, set session information and return user to previous page with login notification.
+                        $_SESSION['signed_in'] = true;
+                        $_SESSION['user_id'] = $result[0]['user_id'];
+                        $_SESSION['user_name'] = $result[0]['user_name'];
+                        $_SESSION['user_level'] = $result[0]['user_level'];
+                        //Reload page and direct to previous page before sign in.
+                        if (isset($_GET['previous'])){
+                            //If topic is set, get topic to return to.
+                            if (isset($_GET['topic'])) {
+                                //return to topic
+                                header('Location:index.php?view=' . $_GET['previous'] . '&topic=' . $_GET['topic']);
+                            } else {
+                                //return to view
+                                header('Location:index.php?view=' . $_GET['previous']);
+                            }
+                        } else {
+                            //Return to forum overview because no view is set
+                            header('Location:index.php');
+                        }
+                    } else {
+                        //Else display errors and increment a login counter (Basic $session counter or advanced IP, Username, datetime tracked in DB).
+                        $login_counter--;
+                        
+                        echo '<div class="card border-danger mb-3 m-auto" style="max-width: 28rem;">
+                        <div class="card-header">Login:</div>';
+
+                        echo '<div class="alert alert-danger" role="alert">';
+                        echo 'Uh-oh.. a couple of fields are not filled in correctly..';
+                        echo '<ul>';
+                        echo '<li>Password is incorrect.</li>';
+                        if ($login_counter > 0){
+                        echo '<li>You have ' . $login_counter . ' login attempts remaining before you will be locked out.</li>';
+                        echo '</ul>';
+                        echo '</div>';
+
+                        echo '<div class="card-body text-secondary">
+                            <form class="" method="post" action="">
+                                <div class="form-group">
+                                    <input type="username" class="form-control text-center" id="user_name" name="user_name" placeholder="Username">
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" class="form-control text-center" id="user_pass" name="user_pass" placeholder="Password">
+                                </div>
+                                <div class="form-group"><button type="submit" class="btn btn-secondary btn-md w-100" name="sign-in-button">Sign In</button></div>
+                            </form>
+                        </div>';
+                    } else {
+                        echo '<li>You have been locked out for too many failed login attempts.</li>';
                     echo '</ul>';
                     echo '</div>';
-
-                    echo '<div class="card-body text-secondary">
-                        <form class="" method="post" action="">
-                            <div class="form-group">
-                                <input type="username" class="form-control text-center" id="user_name" name="user_name" placeholder="Username">
-                            </div>
-                            <div class="form-group">
-                                <input type="password" class="form-control text-center" id="user_pass" name="user_pass" placeholder="Password">
-                            </div>
-                            <div class="form-group"><button type="submit" class="btn btn-secondary btn-md w-100" name="sign-in-button">Sign In</button></div>
-                        </form>
-                    </div>';
-
+                    }
                     // if/else logic to handle different links depending on what page to return to or to carry on to the registration page.
                     if (isset($_GET['previous'])){
                         //If topic is set, get topic to return to.
@@ -90,39 +171,6 @@
                         echo '<div class="card-footer text-center"><a href="index.php">Click here to return to previous page.</a></div>';
                     }
                     echo '</div>';
-                } else {
-                    //No errors, check username and password combination against database. Also hash and salt password for security.
-                    //May need to sanitise and potentially filter for pattern/type at some point.
-                    $user_pass = md5($_POST['user_pass']);
-                    $sql = $dbh->prepare("SELECT user_id, user_name, user_level FROM users WHERE user_name = :user_name AND user_pass = :user_pass");
-                    $sql->bindParam(':user_name', $_POST['user_name'], PDO::PARAM_STR);
-                    $sql->bindParam(':user_pass', $user_pass, PDO::PARAM_STR);
-                    $sql->execute();
-                    $result = $sql->fetch(PDO::FETCH_ASSOC);
-                    $validated = count($result);
-                    if ($validated) {
-                        //If correct, set session information and return user to previous page with login notification.
-                        $_SESSION['signed_in'] = true;
-                        $_SESSION['user_id'] = $result['user_id'];
-                        $_SESSION['user_name'] = $result['user_name'];
-                        $_SESSION['user_level'] = $result['user_level'];
-                        //Reload page and direct to previous page before sign in.
-                        if (isset($_GET['previous'])){
-                            //If topic is set, get topic to return to.
-                            if (isset($_GET['topic'])) {
-                                //return to topic
-                                header('Location:index.php?view=' . $_GET['previous'] . '&topic=' . $_GET['topic']);
-                            } else {
-                                //return to view
-                                header('Location:index.php?view=' . $_GET['previous']);
-                            }
-                        } else {
-                            //Return to forum overview because no view is set
-                            header('Location:index.php');
-                        }
-                    } else {
-                        //Else display errors and increment a login counter (Basic $session counter or advanced IP, Username, datetime tracked in DB).
-                        echo 'Wrong username or password.';
                     }
                 }
             }

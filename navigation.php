@@ -23,16 +23,16 @@
             {
                 if (!isset($_GET['view']) || $_GET['view'] === 'signin'){
                     //don't set 'previous'
-                    echo '<a href="index.php?view=signin">Sign in</a> or <a href="#">create an account</a>.';
+                    echo '<a href="index.php?view=signin">Sign in</a> or <a href="index.php?view=register">create an account</a>.';
                 } else if ($_GET['view'] === 'topic'){
                     //set 'previous' to topic view and topic number
-                    echo '<a href="index.php?view=signin&previous=topic&topic=' . $_GET['topic'] . '">Sign in</a> or <a href="index.php?view=register&previous=topic&topic=' . $_GET['topic'] . '"create an account</a>.';
+                    echo '<a href="index.php?view=signin&previous=topic&topic=' . $_GET['topic'] . '">Sign in</a> or <a href="index.php?view=register&previous=topic&topic=' . $_GET['topic'] . '">create an account</a>.';
                 } else if ($_GET['view'] === 'cat'){
                     //set 'previous' to topic view and topic number
-                    echo '<a href="index.php?view=signin&previous=cat&cat=' . $_GET['cat'] . '">Sign in</a> or <a href="index.php?view=register&previous=cat&cat=' . $_GET['cat'] . '"create an account</a>.';
+                    echo '<a href="index.php?view=signin&previous=cat&cat=' . $_GET['cat'] . '">Sign in</a> or <a href="index.php?view=register&previous=cat&cat=' . $_GET['cat'] . '">create an account</a>.';
                 } else {
                     //set 'previous' to current view
-                    echo '<a href="index.php?view=signin&previous=' . $_GET['view'] . '">Sign in</a> or <a href="index.php?view=register&previous=' . $_GET['view'] . '"create an account</a>.';
+                    echo '<a href="index.php?view=signin&previous=' . $_GET['view'] . '">Sign in</a> or <a href="index.php?view=register&previous=' . $_GET['view'] . '">create an account</a>.';
                 }
             }
             ?>

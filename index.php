@@ -32,6 +32,9 @@
     }  else if ($_GET['view'] == "signin"){
         include 'signin.php';
         //echo 'Sign in page';
+    }  else if ($_GET['view'] == "register"){
+        include 'register.php';
+        //echo 'registration page';
     }  else {
         echo "Error";
     }

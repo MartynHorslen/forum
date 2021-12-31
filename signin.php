@@ -1,4 +1,11 @@
 <?php
+    /********************************* */
+    //Create a login attempt counter stored in DB.
+    /******************************** */
+    $login_counter = 5;
+
+    /*********************************** */
+
     //Check whether user is already signed in
     if (isset($_SESSION['signed_in'])) {
         //If signed in, return to previous page or forum overview
@@ -40,13 +47,6 @@
 
                 //If errors, display them and redisplay form with red error border.
                 if(!empty($errors)){
-                    /********************************* */
-                    //Create a login attempt counter stored in DB.
-                    /******************************** */
-                    $login_counter = 5;
-
-                    /*********************************** */
-
                     echo '<div class="card border-danger mb-3 m-auto" style="max-width: 28rem;">
                         <div class="card-header">Login:</div>';
 
@@ -160,6 +160,10 @@
                             //Carry specific topic to the register view and create return link to topic
                             echo '<div class="card-footer text-center"><a href="index.php?view=register&previous=' . $_GET['previous'] . '&topic=' . $_GET['topic'] . '">Click here to create an account.</a></div>';
                             echo '<div class="card-footer text-center"><a href="index.php?view=' . $_GET['previous'] . '&topic=' . $_GET['topic'] . '">Click here to return to previous page.</a></div>';
+                        } else if (isset($_GET['cat'])) {
+                            //Carry specific topic to the register view and create return link to topic
+                            echo '<div class="card-footer text-center"><a href="index.php?view=register&previous=' . $_GET['previous'] . '&cat=' . $_GET['cat'] . '">Click here to create an account.</a></div>';
+                            echo '<div class="card-footer text-center"><a href="index.php?view=' . $_GET['previous'] . '&cat=' . $_GET['cat'] . '">Click here to return to previous page.</a></div>';
                         } else {
                             //carry non-topic view to register page or return to view
                             echo '<div class="card-footer text-center"><a href="index.php?view=register&previous=' . $_GET['previous'] . '">Click here to create an account.</a></div>';

@@ -54,6 +54,19 @@
                     $errors[] = 'The password and confirmation password do not match.';
                 }
 
+                //check username and email isn't taken.
+                $sql = $dbh->prepare("SELECT `user_name` FROM users WHERE `user_name` = :username");
+                $sql->bindParam(':username', $_POST['user_name'], PDO::PARAM_STR);
+                if ($sql->execute()){
+                    $errors[] = 'Username already taken. Please choose a new username.';
+                }
+
+                $sql = $dbh->prepare("SELECT `user_email` FROM users WHERE `user_email` = :email");
+                $sql->bindParam(':email', $_POST['user_email'], PDO::PARAM_STR);
+                if ($sql->execute()){
+                    $errors[] = 'Email already is use. Please use the "Find Username" or "Reset Password" options.';
+                }
+
                 //If errors, display them and redisplay form with red error border.
                 if(!empty($errors)){
                     echo '<div class="card border-danger mb-3 m-auto" style="max-width: 28rem;">
@@ -90,8 +103,7 @@
                         </div>
                     </div>';
                 } else {
-                    //check details against database and register user.
-                    echo 'Registered.<br />';
+                    //Register user.                    
 
                     //Create a random email verification hash
                     $hash = md5( rand(0,1000) ); // Example output: f4552671f8909587cf485ea990207f3b

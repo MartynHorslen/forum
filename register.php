@@ -91,7 +91,34 @@
                     </div>';
                 } else {
                     //check details against database and register user.
-                    echo 'Registered.';
+                    echo 'Registered.<br />';
+
+                    //Create a random email verification hash
+                    $hash = md5( rand(0,1000) ); // Example output: f4552671f8909587cf485ea990207f3b
+                    $date = date("Y-m-d H:i:s");
+                    $user_level = 0;
+
+                    $sql = $dbh->prepare("INSERT INTO
+                        users(`user_name`, user_pass, user_email, user_date, user_level, `hash`)
+                    VALUES(:username, :userpass, :useremail, :userdate, :userlevel, :userhash)");
+
+                    $sql->bindParam(':username', $_POST['user_name'], PDO::PARAM_STR);
+                    $sql->bindParam(':userpass', $_POST['user_pass'], PDO::PARAM_STR);
+                    $sql->bindParam(':useremail', $_POST['user_email'], PDO::PARAM_STR);
+                    $sql->bindParam(':userdate', $date);
+                    $sql->bindParam(':userlevel', $user_level, PDO::PARAM_INT);
+                    $sql->bindParam(':userhash', $hash, PDO::PARAM_STR);
+
+                    if ($sql->execute()){
+                        //Success
+                        //send verification email
+
+                        //Redirect
+                
+                    } else {
+                        echo 'There has been an error. Please try again later. <br />';                        
+                        echo $sql->errorcode();
+                    }
                     
                 }
             }

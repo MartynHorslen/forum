@@ -113,7 +113,22 @@
                         //Success
                         //send verification email
 
-                        //Redirect
+                        $to      = $_POST['user_email']; // Send email to our user
+                        $subject = 'Mch123s Forum Registration | Verification'; // Give the email a subject 
+                        $message = 'Thanks for registering to mch123s forum!' . "\n" . 'Your account has been created and you can login with the following username. Please use the link below to verify your email address.' . "\n\n" . '------------------------' . "\n" . 
+                        'Username: '. $_POST['user_name'] .'' . "\n" . 
+                        '------------------------' . "\n\n" . 
+                        'Verification link:' . "\n" . 
+                        'http://www.mch123.x10host.com/index.php?view=verify&email='.$to.'&code='.$hash.'
+                        
+                        '; //Our message above including the link
+                                            
+                        $headers = 'From:noreply@mch123.x10host.com' . "\r\n"; // Set from headers
+                        //Send email
+                        mail($to, $subject, $message, $headers);
+
+                        //redirect
+                        header('Location:index.php?alert=registered');
                 
                     } else {
                         echo 'There has been an error. Please try again later. <br />';                        

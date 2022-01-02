@@ -49,6 +49,10 @@
                 } else if ($_POST['user_email'] === ''){
                     $errors[] = 'The email field cannot be empty.';
                 }
+                //Check if passwords match
+                if($_POST['user_pass'] != $_POST['user_pass_check']){
+                    $errors[] = 'The password and confirmation password do not match.';
+                }
 
                 //If errors, display them and redisplay form with red error border.
                 if(!empty($errors)){
@@ -66,25 +70,29 @@
                         echo '</div>';
 
                         echo '<div class="card-body text-secondary">
-                        <form class="" method="post" action="">
-                            <div class="form-group">
-                                <input type="username" class="form-control text-center" id="user_name" name="user_name" placeholder="Username">
-                            </div>
-                            <div class="form-group">
-                                <input type="password" class="form-control text-center" id="user_pass" name="user_pass" placeholder="Password">
-                            </div>
-                            <div class="form-group">
-                                <input type="password" class="form-control text-center" id="user_pass_check" name="user_pass_check" placeholder="Confirm Password">
-                            </div>
-                            <div class="form-group">
-                                <input type="email" class="form-control text-center" id="user_email" name="user_email" placeholder="Email">
-                            </div>
-                            <div class="form-group">
-                                <button type="submit" name="register-button"  class="btn btn-secondary btn-md w-100">Register!</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>';
+                            <form class="" method="post" action="">
+                                <div class="form-group">
+                                    <input type="username" class="form-control text-center" id="user_name" name="user_name" placeholder="Username">
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" class="form-control text-center" id="user_pass" name="user_pass" placeholder="Password">
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" class="form-control text-center" id="user_pass_check" name="user_pass_check" placeholder="Confirm Password">
+                                </div>
+                                <div class="form-group">
+                                    <input type="email" class="form-control text-center" id="user_email" name="user_email" placeholder="Email">
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" name="register-button"  class="btn btn-secondary btn-md w-100">Register!</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>';
+                } else {
+                    //check details against database and register user.
+                    echo 'Registered.';
+                    
                 }
             }
         } else {

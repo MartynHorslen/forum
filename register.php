@@ -55,15 +55,19 @@
                 }
 
                 //check username and email isn't taken.
-                $sql = $dbh->prepare("SELECT `user_name` FROM users WHERE `user_name` = :username");
+                $sql = $dbh->prepare("SELECT count(*) FROM users WHERE `user_name` = :username");
                 $sql->bindParam(':username', $_POST['user_name'], PDO::PARAM_STR);
-                if ($sql->execute()){
+                $sql->execute();
+                $username_count = $sql->fetchColumn();
+                if ($username_count > 0){
                     $errors[] = 'Username already taken. Please choose a new username.';
                 }
 
-                $sql = $dbh->prepare("SELECT `user_email` FROM users WHERE `user_email` = :email");
+                $sql = $dbh->prepare("SELECT count(*) FROM users WHERE `user_email` = :email");
                 $sql->bindParam(':email', $_POST['user_email'], PDO::PARAM_STR);
-                if ($sql->execute()){
+                $sql->execute();
+                $email_count = $sql->fetchColumn();
+                if ($email_count > 0){
                     $errors[] = 'Email already is use. Please use the "Find Username" or "Reset Password" options.';
                 }
 
@@ -104,7 +108,6 @@
                     </div>';
                 } else {
                     //Register user.                    
-
                     //Create a random email verification hash
                     $hash = md5( rand(0,1000) ); // Example output: f4552671f8909587cf485ea990207f3b
                     $date = date("Y-m-d H:i:s");

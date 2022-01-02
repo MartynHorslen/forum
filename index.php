@@ -13,6 +13,14 @@
         include 'navigation.php';
     }
 
+    if (isset($_GET['alert'])){
+        if ($_GET['alert'] = 'registered'){
+            echo '<div class="alert alert-success mb-0" role="alert">
+                You have successfully registered an account. Please check your email for a verification link and then sign in.
+            </div>';
+        }
+    }
+
     //Forum page set by url view.
     if (!isset($_GET['view'])) {
         include 'overview.php';

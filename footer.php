@@ -6,7 +6,8 @@
                 Forum GitHub Repository
             </a>
         </footer>
-
+        <!-- functions.js file -->
+        <script src="functions.js"></script>
         <!-- jQuery 3.6 -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <!-- Option 1: Bootstrap 5 Bundle with Popper -->

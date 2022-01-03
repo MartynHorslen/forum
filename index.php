@@ -35,8 +35,8 @@
         include 'newposts.php';
         //echo 'Forum New Posts view';
     }  else if ($_GET['view'] == "create"){
-        //include 'create.php';
-        echo 'Create a new topic.';
+        include 'create.php';
+        //echo 'Create a new topic.';
     }  else if ($_GET['view'] == "signin"){
         include 'signin.php';
         //echo 'Sign in page';

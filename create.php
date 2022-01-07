@@ -52,7 +52,7 @@
                                     <input type="text" id="topic_subject" class="" name="topic_subject" minlength="1" placeholder="Topic Title" value="' . $_POST['topic_subject'] . '">
                                     <input type="hidden" id="topic_cat" name="topic_cat" value="' . $_GET['cat'] . '"/>
                                     <textarea id="post_content" class="" name="post_content" minlength="1" placeholder="Write your message here..." rows="8">' . $_POST['post_content'] . '</textarea>
-                                    <input type="submit" class="btn btn-secondary btn-md w-50" value="Create topic" onclick="createTopic()"/>
+                                    <input type="button" class="btn btn-secondary btn-md w-50" value="Create topic" onclick="createTopic()"/>
                                 </form>
                             </div>
                         </div>
@@ -76,7 +76,7 @@
                                 <input type="text" id="topic_subject" class="" name="topic_subject" minlength="1" placeholder="Topic Title" required>
                                 <input type="hidden" id="topic_cat" name="topic_cat" value="' . $_GET['cat'] . '"/>
                                 <textarea id="post_content" class="" name="post_content" minlength="1" placeholder="Type your message here..." rows="8"></textarea>
-                                <input type="submit" class="btn btn-secondary btn-md w-50" value="Create topic" onclick="createTopic()" required/>
+                                <input type="button" class="btn btn-secondary btn-md w-50" value="Create topic" onclick="createTopic()" required/>
                             </form>
                         </div>
                     </div>

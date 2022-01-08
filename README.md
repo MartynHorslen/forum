@@ -17,7 +17,7 @@ A PHP, MySQL and Bootstrap forum adaptation from a tutorial.
 
 
 ## General Information
-Followed a tutorial a long time ago to build a forum from scratch. I added some features from other tutorials but have since lost the newer versions of my code. It included Bootstrap, hashing and salting user passwords, PDO and an email verification system - among other various styling adaptations. I would like to rebuild it from scratch as a portfolio project.
+Followed a tutorial a long time ago to build a forum from scratch. I added some features from other tutorials but have since lost the newer versions of my code. It included Bootstrap, PDO, AJAX, hashing and salting of user passwords, an email verification system - among other various styling adaptations. I am rebuilding it here from scratch as a portfolio project.
 
 
 ## Technologies Used

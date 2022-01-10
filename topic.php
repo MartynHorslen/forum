@@ -28,12 +28,12 @@
         //prepare the table
         echo '<div class="card mb-2">
         <div class="row no-gutters">
-            <div class="col-3">
+            <div class="col col-xs col-sm-3">
                 <div class="card-header">
                     Posted By
                 </div>
             </div>
-            <div class="col-9">
+            <div class="col col-xs col-sm-9">
                 <div class="card-header">
                     Post
                 </div>
@@ -42,14 +42,14 @@
 
         //posts
         foreach($result as $post){
-            echo '<div id="post-' . $post['post_id'] . '" class="row">
-                            <div class="col-3">
+            echo '<div id="post-' . $post['post_id'] . '" class="row no-gutters">
+                            <div class="col col-sm-3 col-xs">
                                 <div class="card-body">  
                                 '. $post['user_name'] . '<br />' . $post['post_date'] . '
                                 </div>
                             </div>
-                            <div class="col-9">
-                                <div class="card-body px-1">
+                            <div class="col col-sm-9 col-xs">
+                                <div class="card-body">
                                     ' . $post['post_content'] . '
                                 </div>
                             </div>

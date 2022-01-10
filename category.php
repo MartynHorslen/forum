@@ -36,12 +36,12 @@
             echo '
             <div class="card mb-2">
                 <div class="row no-gutters">
-                    <div class="col-6">
+                    <div class="col-5">
                         <div class="card-header">
                             Topic
                         </div>
                     </div>
-                    <div class="col-2">
+                    <div class="col-3">
                         <div class="card-header">
                             Replies
                         </div>
@@ -58,7 +58,7 @@
                     //Build the card to show topic, username, time posted and how many posts are on that topic.
                     
                     echo '<div class="row">
-                            <div class="col-6">
+                            <div class="col-5">
                                 <div class="card-body py-2">
                                     <a href="index.php?view=topic&topic=' . $topic['topic_id'] . '">
                                         ' . $topic['topic_subject'] . '
@@ -74,7 +74,7 @@
                             $sql->execute();
                             $numOfPosts = count($sql->fetchAll());
 
-                            echo '<div class="col-2">
+                            echo '<div class="col-3">
                                 <div class="card-body py-2 px-1">
                                     Replies: ' . $numOfPosts . '
                                 </div>

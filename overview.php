@@ -2,7 +2,7 @@
 <?php 
     //Get a list of forum categories
     $sql = "SELECT cat_id, cat_name, cat_description FROM categories ORDER BY cat_order ASC";
-    $categories = fetchAllData($sql, $dbh);
+    $categories = fetchAllData($sql);
     
     //Catch empty category table and query error
     if(!$categories)
@@ -21,7 +21,7 @@
             foreach($categories as $catRow) {
                 $cat_id = $catRow['cat_id'];
                 $sql = "SELECT * FROM topics WHERE topic_cat = ' $cat_id '";
-                $topics = fetchAllData($sql, $dbh);
+                $topics = fetchAllData($sql);
                 $numOfTopics = count($topics);
 
                 //Loop through the topics counting the number of posts and topic ID
@@ -29,7 +29,7 @@
                 foreach($topics as $topicRow) {
                     $topic_id = $topicRow['topic_id'];
                     $sql = "SELECT * FROM posts WHERE post_topic = ' $topic_id '";
-                    $posts = fetchAllData($sql, $dbh);
+                    $posts = fetchAllData($sql);
                     $numOfPosts += count($posts);
                 }
 

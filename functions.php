@@ -1,5 +1,6 @@
 <?php
-    function fetchAllData($query, $dbh){
+    function fetchAllData($query){
+        include 'connect.php';
         $result = $dbh->prepare($query);
         $result->execute();
         $result = $result->fetchAll();

@@ -1,6 +1,7 @@
 <?php
     include 'head.php';
     include 'header.php';
+    include 'functions.php';
 
     //Forum Bootstrap Body
     echo '<div class="row no-gutters align-items-center"><!-- open row -->
